@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обработчик отчетов</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="section">
+            <div class="section-title">Пути</div>
+            <div class="subsection" data-target="maru">Мару</div>
+            <div class="subsection" data-target="kalao">Калао</div>
+            <div class="subsection" data-target="isina">Исина</div>
+        </div>
+        
+        <div class="section">
+            <div class="section-title">Отряды</div>
+            <div class="subsection" data-target="knowledge-keepers">Хранители знаний</div>
+            <div class="subsection" data-target="playful-fish">Озорные рыбки</div>
+            <div class="subsection" data-target="depth-explorers">Исследователи глубин</div>
+            <div class="subsection" data-target="peak-conquerors">Покорители вершин</div>
+            <div class="subsection" data-target="black-panthers">Черные пантеры</div>
+            <div class="subsection" data-target="craftsmen">Ремесленники</div>
+            <div class="subsection" data-target="feathered-messengers">Пернатые вестники</div>
+            <div class="subsection" data-target="monitors">Вараны</div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div id="welcome-section" class="content-section active">
+            <h1>Перед Вами программа для подсчета деятельности путей и отрядов ОЗХ.</h1>
+            <p>Для начала работы выберите нужную сферу из бокового раздела.</p>
+        </div>
+
+        <div id="maru" class="content-section">
+            <h1>Путь Мару</h1>
+            <div class="instructions">
+                <h3>Инструкция:</h3>
+                <ol>
+                    <li>Скопируйте отчеты из комментариев к соответственному блогу;</li>
+                    <li>Вставьте исходный текст в Блокнот или любой другой текстовый редактор;</li>
+                    <li>Проверьте отчеты на наличие ошибок и опечаток, исправьте их. Не забывайте, что некорректное заполнение шаблона сказывается на подсчете баллов программой;</li>
+                    <li>Сохраните файл в формате .txt и загрузите его на страницу с помощью специального блока ниже.</li>
+                </ol>
+            </div>
+
+            <div class="upload-area" id="uploadAreaMaru">
+                <p><i>Перетащите файл или нажмите для выбора</i></p>
+                <input type="file" id="fileInputMaru" class="file-input" accept=".txt">
+                <div id="processButtonContainerMaru" class="process-button-container">
+                    <button class="process-btn" id="processBtnMaru">Обработать отчеты</button>
+                </div>
+            </div>
+
+            <div class="results-container" id="resultsContainerMaru">
+                <h3>Результаты:</h3>
+                <p>Последователи+ пути Мару выделяются <u>подчеркиванием.</u></p>
+                <table class="results-table" id="resultsTableMaru">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Имя</th>
+                            <th rowspan="2">ID</th>
+                            <th colspan="4" class="section-header">Патрули</th>
+                            <th colspan="5" class="section-header">Дозоры и дежурства</th>
+                        </tr>
+                        <tr>
+                            <th class="subsection-header points-column">Баллы</th>
+                            <th class="subsection-header">Участия</th>
+                            <th class="subsection-header">Ведения</th>
+                            <th class="subsection-header">Сборы</th>
+
+                            <th class="subsection-header points-column">Баллы</th>
+                            <th class="subsection-header">(П) дозоры</th>
+                            <th class="subsection-header">(А) дозоры</th>
+                            <th class="subsection-header">(П) деж.</th>
+                            <th class="subsection-header">(А) деж.</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resultsBodyMaru">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="kalao" class="content-section">
+            <h1>Путь Калао</h1>
+            <div class="instructions">
+                <h3>Инструкция:</h3>
+                <ol>
+                    <li>Скопируйте отчеты из комментариев к соответственному блогу;</li>
+                    <li>Вставьте исходный текст в Блокнот или любой другой текстовый редактор;</li>
+                    <li>Проверьте отчеты на наличие ошибок и опечаток, исправьте их. Не забывайте, что некорректное заполнение шаблона сказывается на подсчете баллов программой;</li>
+                    <li>Сохраните файл в формате .txt и загрузите его на страницу с помощью специального блока ниже.</li>
+                </ol>
+            </div>
+
+            <div class="upload-area" id="uploadAreaKalao">
+                <p><i>Перетащите файл или нажмите для выбора</i></p>
+                <input type="file" id="fileInputKalao" class="file-input" accept=".txt">
+                <div id="processButtonContainerKalao" class="process-button-container">
+                    <button class="process-btn" id="processBtnKalao">Обработать отчеты</button>
+                </div>
+            </div>
+
+            <div class="results-container" id="resultsContainerKalao">
+                <h3>Результаты:</h3>
+                <p>Последователи+ пути Калао выделяются <u>подчеркиванием.</u></p>
+                    <table class="results-table" id="resultsTableKalao">
+        <thead>
+            <tr>
+                <th rowspan="2">Имя</th>
+                <th rowspan="2">ID</th>
+                <th rowspan="2" class="points-column">Баллы</th>
+                <th colspan="4" class="section-header">Патрули</th>
+                <th colspan="2" class="section-header">Вне патрулей</th>
+                <th colspan="2" class="section-header">Другое</th>
+            </tr>
+            <tr>
+                <th class="subsection-header">Участия</th>
+                <th class="subsection-header">Ведения</th>
+                <th class="subsection-header">Сборы</th>
+                <th class="subsection-header">Перенос</th>
+                
+                <th class="subsection-header">Охота</th>
+                <th class="subsection-header">Перенос</th>
+                
+                <th class="subsection-header">Чистка</th>
+                <th class="subsection-header">Транспорт</th>
+            </tr>
+        </thead>
+        <tbody id="resultsBodyKalao">
+        </tbody>
+    </table>
+            </div>
+        </div>
+
+<div id="isina" class="content-section">
+    <h1>Путь Исины</h1>
+    <div class="instructions">
+        <h3>Инструкция:</h3>
+        <ol>
+            <li>Скопируйте отчеты из комментариев к соответственному блогу;</li>
+            <li>Вставьте исходный текст в Блокнот или любой другой текстовый редактор;</li>
+            <li>Проверьте отчеты на наличие ошибок и опечаток, исправьте их. Не забывайте, что некорректное заполнение шаблона сказывается на подсчете баллов программой;</li>
+            <li>Сохраните файл в формате .txt и загрузите его на страницу с помощью специального блока ниже.</li>
+        </ol>
+    </div>
+
+    <div class="upload-area" id="uploadAreaIsina">
+        <p><i>Перетащите файл или нажмите для выбора</i></p>
+        <input type="file" id="fileInputIsina" class="file-input" accept=".txt">
+        <div id="processButtonContainerIsina" class="process-button-container">
+            <button class="process-btn" id="processBtnIsina">Обработать отчеты</button>
+        </div>
+    </div>
+
+    <div class="results-container" id="resultsContainerIsina">
+        <h3>Результаты:</h3>
+        <p>Последователи+ пути Исины выделяются <u>подчеркиванием.</u> В таблице зорчих отображаются добытые ресурсы. Баллы за них также считаются программой и прибавляются к общим.</p>
+        
+        <div class="table-switcher" id="tableSwitcherIsina">
+            <button class="table-switch-btn" data-table="general">Общая таблица</button>
+            <button class="table-switch-btn" data-table="zorch">Таблица зорчих</button>
+        </div>
+
+        <div class="web-info" id="webInfoIsina"></div>
+
+        <div class="table-container" id="generalTableIsina">
+            <table class="results-table" id="resultsTableIsina">
+                <thead>
+                    <tr>
+                        <th rowspan="2">Имя</th>
+                        <th rowspan="2">ID</th>
+                        <th rowspan="2" class="points-column">Баллы</th>
+                        <th colspan="4" class="section-header">Все пути</th>
+                        <th colspan="2" class="section-header">Путь Исины</th>
+                    </tr>
+                    <tr>
+                        <th class="subsection-header">Патрули</th>
+                        <th class="subsection-header">Дозоры</th>
+                        <th class="subsection-header">Перенос из ПВ</th>
+                        <th class="subsection-header">Мыши</th>
+                        <th class="subsection-header">Выдача костоправов</th>
+                        <th class="subsection-header">Выдача трав</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBodyIsina"></tbody>
+            </table>
+        </div>
+
+        <div id="zorchTableIsina" class="table-container">
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Имя</th>
+                        <th>ID</th>
+                        <th>Паутина</th>
+                        <th>Ресурсы</th>
+                        <th>Мох</th>
+                        <th>Травы</th>
+                        <th>Вьюнки</th>
+                        <th>Крепкие ветки</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBodyZorch"></tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+    <link rel="stylesheet" href="static/css/main.css">
+    <script src="static/js/core.js"></script>
+    <script src="static/js/maru.js"></script>
+    <script src="static/js/kalao.js"></script>
+    <script src="static/js/isina.js"></script>
+    <script src="static/js/app.js"></script>
+    
+</body>
+</html>
