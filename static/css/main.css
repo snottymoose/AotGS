@@ -162,6 +162,10 @@ body {
     font-weight: bold;
 }
 
+.subsection-header {
+    background-color: #3a3a42 !important;
+}
+
 .results-table tbody td.divider {
     border-right: 2px solid #2c2c32;
 }
@@ -257,4 +261,5 @@ body {
     .results-table {
         font-size: 12px;
     }
+
 }
