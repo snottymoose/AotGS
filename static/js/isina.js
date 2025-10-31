@@ -50,12 +50,23 @@ function parseIsinaReports(content) {
 
             const watchMatch = line.match(/Дозорный:\s*([^(]+?)\s*\((\d+)\)\s*(?:\(([^)]+)\))?/i);
             if (watchMatch) {
-                const hasBonus = watchMatch[3]?.includes('и');
-                const pl = getOrCreateIsinaPlayer(players, watchMatch[2].trim(), watchMatch[1].trim(), hasBonus);
-                const hours = 0;
-                const halfs = Math.floor(hours * 2);
-                pl.watchHours = (pl.watchHours || 0) + halfs * 0.5;
-                pl.points += halfs * (pl.hasBonus ? 4 : 2);
+                const name = watchMatch[1].trim();
+                const id = watchMatch[2].trim();
+                const hasBonus = (watchMatch[3] || "").includes('и');
+                const player = getOrCreateIsinaPlayer(players, id, name, hasBonus);
+
+                const nextLine = lines[lines.indexOf(line) + 1] || "";
+                const timeMatch = nextLine.match(/Время дозора:\s*(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})/);
+                let hours = 0;
+                if (timeMatch) {
+                    const start = parseInt(timeMatch[1]) * 60 + parseInt(timeMatch[2]);
+                    const end = parseInt(timeMatch[3]) * 60 + parseInt(timeMatch[4]);
+                    const diff = Math.max(0, end - start);
+                    hours = diff / 60;
+                }
+
+                player.watchHours = (player.watchHours || 0) + hours;
+                player.points += hours * (player.hasBonus ? 4 : 2);
                 continue;
             }
 
@@ -84,15 +95,19 @@ function parseIsinaReports(content) {
                 continue;
             }
 
-            const transferMatch = line.match(/([^(]+?)\s*\((\d+)\)\s*(?:\(([^)]+)\))?.*?перенес\s+(\d+)\s*ресурс/i);
+            const transferMatch = line.match(/([^(]+?)\s*\((\d+)\)\s*(?:\(([^)]+)\))?.*?перенес[а-яё]*\s+(\d+)\s*ресурс/i);
             if (transferMatch) {
-                const hasBonus = transferMatch[3]?.includes('и');
-                const pl = getOrCreateIsinaPlayer(players, transferMatch[2].trim(), transferMatch[1].trim(), hasBonus);
+                const name = transferMatch[1].trim();
+                const id = transferMatch[2].trim();
+                const flags = (transferMatch[3] || "").toLowerCase();
+                const hasBonus = flags.includes('и');
                 const resources = parseInt(transferMatch[4]) || 0;
+
                 const mossMatch = line.match(/(?:[\/,]\s*|\b)\s*(\d+)\s*(?:мох|мха|мху|мх[аеиоу])/i);
                 const moss = mossMatch ? parseInt(mossMatch[1]) || 0 : 0;
-                
+
                 const totalItems = resources + moss;
+                const pl = getOrCreateIsinaPlayer(players, id, name, hasBonus);
                 pl.transferPV = (pl.transferPV || 0) + totalItems;
                 pl.mossCount = (pl.mossCount || 0) + moss;
                 totalMoss += moss;
