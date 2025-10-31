@@ -183,6 +183,10 @@ body {
     background-color: #f5f5f5;
 }
 
+.results-table tr:hover td.points-column {
+    background-color: #d8e8f8 !important;
+}
+
 .underlined-name {
     text-decoration: underline;
 }
@@ -263,3 +267,4 @@ body {
     }
 
 }
+
